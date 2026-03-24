@@ -49,27 +49,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Form submission animation (mock)
-    const form = document.querySelector('.contact-form');
+    // Form submission animation for Portal
+    const form = document.querySelector('.portal-form');
     if(form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const btn = form.querySelector('button');
             const originalText = btn.textContent;
-            btn.textContent = 'পাঠানো হচ্ছে...';
+            
+            // Premium sending animation
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
             btn.style.opacity = '0.7';
+            btn.disabled = true;
             
             setTimeout(() => {
-                btn.textContent = 'বার্তা পাঠানো হয়েছে!';
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> সফলভাবে জমা দেওয়া হয়েছে!';
                 btn.style.backgroundColor = '#059669'; // Emerald 600
                 btn.style.opacity = '1';
                 form.reset();
                 
+                // Show a toast or subtle notification if needed, but button change is good for now
                 setTimeout(() => {
                     btn.textContent = originalText;
                     btn.style.backgroundColor = '';
-                }, 3000);
-            }, 1500);
+                    btn.style.opacity = '1';
+                    btn.disabled = false;
+                }, 4000);
+            }, 2000);
         });
     }
 });
