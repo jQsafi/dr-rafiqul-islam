@@ -8,6 +8,8 @@
     <meta name="description" content="ড. এস. এম. রফিকুল ইসলাম বাচ্চু - সংসদ সদস্য, গাজীপুর-৩ এর অফিশিয়াল বায়োগ্রাফি।">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="style.css">
     <!-- Font Awesome for Social Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -124,8 +126,17 @@
                 <p>গাজীপুর-৩ আসনের মানুষের জীবনমান উন্নয়নে বাস্তবায়িত কিছু উল্লেখযোগ্য প্রকল্প।</p>
                 <div class="divider"></div>
             </div>
+            
+            <!-- Gallery Filters -->
+            <div class="gallery-filters">
+                <button class="filter-btn active" data-filter="all">সবগুলো</button>
+                <button class="filter-btn" data-filter="health">স্বাস্থ্য</button>
+                <button class="filter-btn" data-filter="transport">যোগাযোগ</button>
+                <button class="filter-btn" data-filter="education">শিক্ষা</button>
+            </div>
+
             <div class="projects-grid">
-                <div class="project-card glass-effect hover-float">
+                <div class="project-card glass-effect hover-float" data-category="health">
                     <div class="project-image">
                         <img src="assets/project_hospital.png" alt="Hospital Project">
                     </div>
@@ -273,6 +284,8 @@
         </div>
     </footer>
 
+    <!-- Leaflet Map JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="script.js"></script>
 </body>
 
