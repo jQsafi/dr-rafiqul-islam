@@ -1,0 +1,28 @@
+{
+  "name": "bachchu-bio",
+  "version": "1.0.0",
+  "description": "গাজীপুর-৩ আসনের সংসদ সদস্য ড. এস. এম. রফিকুল ইসলাম বাচ্চুর একটি প্রিমিয়াম এবং রেসপনসিভ বায়োগ্রাফি ওয়েবসাইট।",
+  "main": "script.js",
+  "homepage": "https://jqsafi.github.io/dr-rafiqul-islam/",
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d .",
+    "build": "echo 'No build step required for static files'",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jQsafi/dr-rafiqul-islam.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jQsafi/dr-rafiqul-islam/issues"
+  },
+  "homepage": "https://github.com/jQsafi/dr-rafiqul-islam#readme",
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
