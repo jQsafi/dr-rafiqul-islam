@@ -501,6 +501,55 @@ main {
     }
 }
 
+/* News & Updates Section */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.news-card {
+    padding: 2rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.news-date {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.news-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    color: #fff;
+    line-height: 1.4;
+}
+
+.news-content p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.read-more {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: letter-spacing 0.3s ease;
+}
+
+.read-more:hover {
+    letter-spacing: 2px;
+}
+
 /* Contact Section */
 .contact-box {
     max-width: 600px;
