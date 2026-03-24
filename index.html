@@ -223,16 +223,39 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- Constituent Portal Section (Feedback) -->
         <section id="contact" class="contact section-offset fade-in-up">
             <div class="contact-box glass-effect">
-                <h2>যোগাযোগ</h2>
-                <p>গাজীপুর-৩ আসনের উন্নয়নে আপনার যেকোনো মতামত বা পরামর্শ জানাতে পারেন।</p>
-                <form class="contact-form">
-                    <input type="text" placeholder="আপনার নাম" required>
-                    <input type="email" placeholder="ইমেইল এড্রেস" required>
-                    <textarea placeholder="আপনার বার্তা লিখুন..." rows="4" required></textarea>
-                    <button type="submit" class="btn btn-primary">বার্তা পাঠান</button>
+                <div class="portal-header">
+                    <span class="badge">সিটিজেন পোর্টাল</span>
+                    <h2>জনগণের সরাসরি যোগাযোগ</h2>
+                    <p>গাজীপুর-৩ আসনের উন্নিয়ন এবং আপনার যেকোনো সাহায্য বা পরামর্শের জন্য আমরা প্রস্তুত।</p>
+                </div>
+                <form class="contact-form portal-form">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="name">আপনার নাম</label>
+                            <input type="text" id="name" placeholder="নাম লিখুন" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">ফোন নম্বর</label>
+                            <input type="tel" id="phone" placeholder="০১৭XXXXXXXX" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="category">বার্তার ধরন</label>
+                        <select id="category" class="glass-effect">
+                            <option value="suggestion">পরামর্শ (Suggestion)</option>
+                            <option value="complaint">অভিযোগ (Complaint)</option>
+                            <option value="help">সহায়তা (Help Request)</option>
+                            <option value="appreciation">ধন্যবাদ জ্ঞাপন (Appreciation)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="message">আপনার বার্তা</label>
+                        <textarea id="message" placeholder="আপনার কথা বিস্তারিত লিখুন..." rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary portal-btn">আবেদন জমা দিন</button>
                 </form>
             </div>
         </section>
