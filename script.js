@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrollPercent = (scrollTop / scrollHeight) * 100;
-        
+
         if (progressBar) {
             progressBar.style.width = scrollPercent + '%';
         }
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Scroll reveals for timeline items and sections
+    // Scroll reveals for timeline items and sections (Standard IntersectionObserver)
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -72,12 +72,14 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
             }
         });
     }, observerOptions);
 
-    // Observe timeline items
-    document.querySelectorAll('.timeline-item').forEach(item => {
+    // Observe timeline items and custom hero animations
+    document.querySelectorAll('.timeline-item, .animate-hero-text, .animate-hero-img').forEach(item => {
         observer.observe(item);
     });
 
@@ -87,6 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
                 entry.target.style.transform = 'translateY(0)';
+            } else {
+                entry.target.style.opacity = '0';
+                entry.target.style.transform = 'translateY(30px)';
             }
         });
     }, observerOptions);
@@ -97,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
         sectionObserver.observe(item);
     });
-    
+
     // Smooth scroll for nav links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -126,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             projectCards.forEach(card => {
                 const category = card.getAttribute('data-category');
-                
+
                 if (filter === 'all' || filter === category) {
                     card.style.display = 'block';
                     setTimeout(() => {
@@ -147,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Project Map Initialization
     if (document.getElementById('map')) {
         // Center of Gazipur (approximate coordinates for Sriupur/Kaliakair)
-        const gazipurCoord = [24.1, 90.4]; 
+        const gazipurCoord = [24.1, 90.4];
         const map = L.map('map', {
             scrollWheelZoom: false
         }).setView(gazipurCoord, 11);
@@ -218,23 +223,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Form submission animation for Portal
     const form = document.querySelector('.portal-form');
-    if(form) {
+    if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const btn = form.querySelector('button');
             const originalText = btn.textContent;
-            
+
             // Premium sending animation
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
             btn.style.opacity = '0.7';
             btn.disabled = true;
-            
+
             setTimeout(() => {
                 btn.innerHTML = '<i class="fas fa-check-circle"></i> সফলভাবে জমা দেওয়া হয়েছে!';
                 btn.style.backgroundColor = '#059669'; // Emerald 600
                 btn.style.opacity = '1';
                 form.reset();
-                
+
                 // Show a toast or subtle notification if needed, but button change is good for now
                 setTimeout(() => {
                     btn.textContent = originalText;

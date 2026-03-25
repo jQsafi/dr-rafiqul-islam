@@ -95,27 +95,27 @@
     </nav>
 
     <!-- Hero Section -->
-    <section id="hero" class="hero fade-in">
+    <section id="hero" class="hero">
         <div class="hero-content">
-            <div class="hero-text">
-                <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem;">
+            <div class="hero-image-container glass-effect animate-hero-img">
+                <img src="assets/politician_portrait.jpg" alt="Dr. S. M. Rafiqul Islam Bachchu" class="hero-img"
+                    id="hero-img">
+            </div>
+            <div class="hero-text animate-hero-text" style="display: flex; flex-direction: column; align-items: flex-end; text-align: right;">
+                <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.6rem; margin-bottom: 1.5rem;">
                     <span class="badge" style="margin-bottom: 0;">সংসদ সদস্য, ১৯৬,গাজীপুর-০৩</span>
                     <span class="badge" style="margin-bottom: 0; background: rgba(59, 130, 246, 0.2); border-color: rgba(59, 130, 246, 0.3); color: #93c5fd;">সহ-স্বাস্থ্য বিষয়ক সম্পাদক, বিএনপি।</span>
                     <span class="badge" style="margin-bottom: 0; background: rgba(245, 158, 11, 0.2); border-color: rgba(245, 158, 11, 0.3); color: #fcd34d;">সিনিয়র যুগ্ম আহ্বায়ক-গাজীপুর জেলা বিএনপি।</span>
                 </div>
                 <h1 class="title">ড. এস. এম. <br><span class="highlight">রফিকুল ইসলাম</span> বাচ্চু</h1>
-                <p class="subtitle">বাংলাদেশ জাতীয়তাবাদী দলের (বিএনপি) একজন নিবেদিতপ্রাণ নেতা এবং গাজীপুরের মানুষের সেবক।</p>
-                <div class="social-links">
+                <p class="subtitle" style="margin-left: auto; margin-right: 0;">বাংলাদেশ জাতীয়তাবাদী দলের (বিএনপি) একজন নিবেদিতপ্রাণ নেতা এবং গাজীপুরের মানুষের সেবক।</p>
+                <div class="social-links" style="justify-content: flex-end; width: 100%;">
                     <a href="https://www.facebook.com/Dr.Bachchu" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
                     <a href="#" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
                     <a href="#" class="social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
-                <a href="#about" class="btn btn-primary">বিস্তারিত জানুন</a>
-            </div>
-            <div class="hero-image-container glass-effect">
-                <img src="assets/politician_portrait.jpg" alt="Dr. S. M. Rafiqul Islam Bachchu" class="hero-img"
-                    id="hero-img">
+                <a href="#about" class="btn btn-primary" style="margin-top: 0.5rem;">বিস্তারিত জানুন</a>
             </div>
         </div>
     </section>
@@ -451,6 +451,7 @@
     <!-- Leaflet Map JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Standard Scripts -->
     <script src="script.js"></script>
 </body>
 
