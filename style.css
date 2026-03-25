@@ -60,6 +60,23 @@ body {
     100% { transform: translate(-50px, 50px) scale(1.1); }
 }
 
+/* Watermark */
+.bg-watermark {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    background-image: url('assets/bnp_logo.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.04; /* Very low opacity to keep focus on main content */
+    z-index: -2;
+    pointer-events: none;
+}
+
 /* Glassmorphism Utilities */
 .glass-effect {
     background: var(--glass-bg);
