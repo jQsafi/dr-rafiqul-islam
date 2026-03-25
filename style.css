@@ -121,13 +121,20 @@ a {
     align-items: center;
 }
 
-.logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #fff, #94a3b8);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+.nav-logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo img {
+    height: 45px;
+    width: auto;
+    transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 5px rgba(255, 255, 255, 0.1));
+}
+
+.nav-logo:hover img {
+    transform: scale(1.05);
 }
 
 .nav-links {
