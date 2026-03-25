@@ -1,4 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Navbar Scroll Effect
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Hamburger Mobile Menu
+    const hamburger = document.querySelector('.hamburger');
+    const navLinksContainer = document.querySelector('.nav-links');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    if (hamburger && navLinksContainer) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinksContainer.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinksContainer.classList.remove('active');
+            });
+        });
+    }
+
     // Scroll reveals for timeline items and sections
     const observerOptions = {
         threshold: 0.1,
