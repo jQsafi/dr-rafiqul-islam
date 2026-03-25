@@ -252,7 +252,10 @@ main {
     align-items: center;
     padding-top: 80px;
     position: relative;
-    background-image: linear-gradient(to right, rgba(15, 23, 42, 0.98) 10%, rgba(15, 23, 42, 0.4) 100%), url('assets/hero_cover.jpg');
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.15) 30%, rgba(15, 23, 42, 0.8) 100%), url('assets/hero_cover.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -261,7 +264,7 @@ main {
 
 .hero-content {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 0.8fr 1.2fr;
     gap: 4rem;
     align-items: center;
     max-width: 1200px;
@@ -282,10 +285,20 @@ main {
     border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
+.hero-text {
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
 .hero-text .title {
     font-size: 4rem;
     margin-bottom: 1.5rem;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    text-shadow: 0 4px 20px rgba(0,0,0,0.8);
 }
 
 .hero-text .highlight {
@@ -304,8 +317,9 @@ main {
     overflow: hidden;
     padding: 10px;
     max-width: 400px;
-    margin-left: auto;
-    transform: perspective(1000px) rotateY(-5deg);
+    margin-right: auto;
+    margin-left: 0;
+    transform: perspective(1000px) rotateY(5deg);
     transition: transform 0.5s ease;
     box-shadow: 0 0 40px rgba(16, 185, 129, 0.4), 0 0 80px rgba(16, 185, 129, 0.2); /* Subtle initial glow */
 }
@@ -938,4 +952,32 @@ footer {
     .contact-box {
         padding: 2rem;
     }
+}
+
+/* Hero Scroll Animations */
+.animate-hero-img {
+    opacity: 0;
+    transform: translateX(-100px) perspective(1000px) rotateY(-10deg);
+    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-hero-img.visible {
+    opacity: 1;
+    transform: translateX(0) perspective(1000px) rotateY(5deg);
+}
+
+/* Ensure hover state still works after visible */
+.animate-hero-img.visible:hover {
+    transform: perspective(1000px) rotateY(0deg) scale(1.02);
+}
+
+.animate-hero-text {
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.animate-hero-text.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
