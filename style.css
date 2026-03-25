@@ -297,10 +297,12 @@ main {
     margin-left: auto;
     transform: perspective(1000px) rotateY(-5deg);
     transition: transform 0.5s ease;
+    box-shadow: 0 0 40px rgba(16, 185, 129, 0.4), 0 0 80px rgba(16, 185, 129, 0.2); /* Subtle initial glow */
 }
 
 .hero-image-container:hover {
     transform: perspective(1000px) rotateY(0deg) scale(1.02);
+    box-shadow: 0 0 60px rgba(16, 185, 129, 0.6), 0 0 100px rgba(16, 185, 129, 0.3); /* Enhanced glow on hover */
 }
 
 .hero-img {
