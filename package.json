@@ -21,7 +21,6 @@
   "bugs": {
     "url": "https://github.com/jQsafi/dr-rafiqul-islam/issues"
   },
-  "homepage": "https://github.com/jQsafi/dr-rafiqul-islam#readme",
   "devDependencies": {
     "gh-pages": "^6.3.0"
   }
