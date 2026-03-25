@@ -1,4 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Scroll Progress Bar & Back to Top Logic
+    const progressBar = document.getElementById('progressBar');
+    const backToTopBtn = document.getElementById('backToTopBtn');
+
+    window.addEventListener('scroll', () => {
+        // Calculate scroll progress percentage
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrollPercent = (scrollTop / scrollHeight) * 100;
+        
+        if (progressBar) {
+            progressBar.style.width = scrollPercent + '%';
+        }
+
+        // Show or hide back to top button
+        if (backToTopBtn) {
+            if (scrollTop > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        }
+    });
+
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
     // Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
@@ -142,6 +175,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 type: "শিক্ষা",
                 coords: [24.18, 90.38],
                 desc: "সরকারি প্রাথমিক বিদ্যালয়ের নতুন ভবন।"
+            },
+            {
+                name: "কৃষি ও আধুনিক সেচ",
+                type: "কৃষি",
+                coords: [24.12, 90.41],
+                desc: "কৃষকদের জন্য আধুনিক সেচ ব্যবস্থা।"
+            },
+            {
+                name: "তরুণদের কর্মসংস্থান",
+                type: "কর্মসংস্থান",
+                coords: [24.08, 90.48],
+                desc: "নতুন কারিগরি ট্রেনিং সেন্টার।"
+            },
+            {
+                name: "পল্লী উন্নয়ন",
+                type: "অবকাঠামো",
+                coords: [24.20, 90.35],
+                desc: "গ্রামাঞ্চলে শতভাগ বিদ্যুতায়ন।"
             }
         ];
 
