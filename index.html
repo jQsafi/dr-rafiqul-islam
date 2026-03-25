@@ -63,6 +63,11 @@
 </head>
 
 <body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-container">
+        <div class="scroll-progress-bar" id="progressBar"></div>
+    </div>
+
     <!-- Background Elements -->
     <div class="bg-shape shape-1"></div>
     <div class="bg-shape shape-2"></div>
@@ -94,12 +99,16 @@
         <section id="hero" class="hero fade-in">
             <div class="hero-content">
                 <div class="hero-text">
-                    <span class="badge">সংসদ সদস্য, গাজীপুর-৩</span>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 1.5rem;">
+                        <span class="badge" style="margin-bottom: 0;">সংসদ সদস্য, ১৯৬,গাজীপুর-০৩</span>
+                        <span class="badge" style="margin-bottom: 0; background: rgba(59, 130, 246, 0.2); border-color: rgba(59, 130, 246, 0.3); color: #93c5fd;">সহ-স্বাস্থ্য বিষয়ক সম্পাদক, বিএনপি।</span>
+                        <span class="badge" style="margin-bottom: 0; background: rgba(245, 158, 11, 0.2); border-color: rgba(245, 158, 11, 0.3); color: #fcd34d;">সিনিয়র যুগ্ম আহ্বায়ক-গাজীপুর জেলা বিএনপি।</span>
+                    </div>
                     <h1 class="title">ড. এস. এম. <br><span class="highlight">রফিকুল ইসলাম</span> বাচ্চু</h1>
                     <p class="subtitle">বাংলাদেশ জাতীয়তাবাদী দলের (বিএনপি) একজন নিবেদিতপ্রাণ নেতা এবং গাজীপুরের মানুষের
                         সেবক।</p>
                     <div class="social-links">
-                        <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.facebook.com/Dr.Bachchu" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
                         <a href="#" class="social-icon" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
@@ -117,7 +126,7 @@
         <section id="about" class="about section-offset fade-in-up">
             <div class="section-header">
                 <h2>সংক্ষিপ্ত পরিচিতি</h2>
-                <p style="margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">ডা. এস এম রফিকুল ইসলাম (বাচ্চু) একজন বাংলাদেশী চিকিৎসক ও রাজনীতিবিদ। তিনি গাজীপুর-৩ আসন থেকে নির্বাচিত ত্রয়োদশ জাতীয় সংসদের একজন সদস্য। তিনি বর্তমানে বাংলাদেশ জাতীয়তাবাদী দল (বিএনপি)-এর কেন্দ্রীয় নির্বাহী কমিটির সহ-স্বাস্থ্য বিষয়ক সম্পাদক ও গাজীপুর জেলা বিএনপির ১নং যুগ্ন সম্পাদক হিসেবে দায়িত্ব পালন করছেন। ২০২৬ সালের ১২ ফেব্রুয়ারি অনুষ্ঠিত নির্বাচনে তিনি এই আসন থেকে বিজয়ী হন।</p>
+                <p style="margin-bottom: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">ডা. এস এম রফিকুল ইসলাম (বাচ্চু) একজন বাংলাদেশী চিকিৎসক ও রাজনীতিবিদ। তিনি ১৯৬,গাজীপুর-০৩ আসন থেকে নির্বাচিত ত্রয়োদশ জাতীয় সংসদের একজন সদস্য। তিনি বর্তমানে বাংলাদেশ জাতীয়তাবাদী দল (বিএনপি)-এর কেন্দ্রীয় নির্বাহী কমিটির সহ-স্বাস্থ্য বিষয়ক সম্পাদক ও গাজীপুর জেলা বিএনপির সিনিয়র যুগ্ম আহ্বায়ক হিসেবে দায়িত্ব পালন করছেন। ২০২৬ সালের ১২ ফেব্রুয়ারি অনুষ্ঠিত নির্বাচনে তিনি এই আসন থেকে বিজয়ী হন।</p>
                 <p style="margin-bottom: 1.5rem; max-width: 800px; margin-left: auto; margin-right: auto;">তাছাড়া তিনি ড্যাব (ডক্টরস অ্যাসোসিয়েশন অব বাংলাদেশ)-এর উপদেষ্টা হিসাবেও দায়িত্ব পালন করে আসছেন।</p>
                 <div class="divider"></div>
             </div>
@@ -153,26 +162,39 @@
                     <div class="timeline-content">
                         <h3>সংসদ সদস্য নির্বাচিত</h3>
                         <span class="date">ফেব্রুয়ারি ২০২৬</span>
-                        <p>ত্রয়োদশ জাতীয় সংসদ নির্বাচনে তিনি গাজীপুর-৩ আসন থেকে ১,৬২,৩৪৩ ভোট পেয়ে বিপুল ব্যবধানে
-                            জয়লাভ করেন।</p>
+                        <p>ত্রয়োদশ জাতীয় সংসদ নির্বাচনে তিনি ১৯৬, গাজীপুর-০৩ আসন থেকে বিপুল ব্যবধানে জয়লাভ করেন।</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h3>বিএনপি'র মনোনয়ন</h3>
-                        <span class="date">ডিসেম্বর ২০২৫</span>
-                        <p>দলীয় সমর্থন ও তৃণমূলের আস্থার ভিত্তিতে তিনি গাজীপুর-৩ আসনে বিএনপি'র প্রার্থী হিসেবে
-                            মনোনয়নপত্র জমা দেন।</p>
+                        <h3>কেন্দ্রীয় ও পেশাজীবী দায়িত্ব</h3>
+                        <span class="date">বর্তমান</span>
+                        <p>বিএনপির কেন্দ্রীয় কমিটির সহ-স্বাস্থ্য বিষয়ক সম্পাদক, ড্যাবের সিনিয়র যুগ্ম মহাসচিব ও সম্মলিত পেশাজীবী পরিষদের কেন্দ্রীয় আহবায়ক কমিটির সদস্য। পেশাগত জীবনে তিনি এনাম মেডিকেল কলেজের অধ্যাপক হিসেবে এবং পরপর চারবার নির্বাচিত বিএমএ-এর কেন্দ্রীয় প্রতিনিধি হিসেবে দায়ীত্ব পালন করছেন।</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <h3>আন্দোলন ও সংগ্রাম</h3>
-                        <span class="date">দীর্ঘ রাজনৈতিক পথচলা</span>
-                        <p>গণতন্ত্র পুনরুদ্ধার এবং জনগণের ন্যায্য অধিকার আদায়ের আন্দোলনে তিনি একাধিকবার হামলা ও মামলার
-                            শিকার হয়েছেন। রাজনৈতিক ময়দানে তার এই দৃঢ়তা তাকে একজন সত্যিকারের জননেতায় পরিণত করেছে।</p>
+                        <h3>চাকরিচ্যুতি ও রাজনৈতিক দুঃসময়</h3>
+                        <span class="date">২০০৭ – ২০১০</span>
+                        <p>০১-১১ এর পর বিএনপির রাজনৈতিক দুঃসময়ে তিনি ড্যাবের ভারপ্রাপ্ত মহাসচিবের দায়ীত্ব পালন করেন ও শাহাবাগ থানা বিএনপির সাথে জড়িত হন। রাজনৈতিক প্রতিহিংসার কারনে ২০১০ সালের ২২শে ডিসেম্বর বিএসএমএমইউ (পিজি হাসপাতাল) হতে চাকুরীতুচ্য হন।</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>ড্যাব প্রতিষ্ঠা ও শ্রীপুর বিএনপি</h3>
+                        <span class="date">১৯৮৯ – ১৯৯১</span>
+                        <p>১৯৮৯ সালের ৬ই আগষ্ট ড্যাব প্রতিষ্ঠা করেন ও যুগ্ন মহাসচিব হিসেবে এর সম্প্রসারনে নিরলস কাজ করেন। পরবর্তীতে ১৯৯১ সাল হতে শ্রীপুর বিএনপির সাথে জড়িত হন ও দলের জন্য কাজ করেন।</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>ছাত্র রাজনীতিতে সূচনা</h3>
+                        <span class="date">৩ মার্চ, ১৯৮১ – ১৯৮৭</span>
+                        <p>১৯৮১ সালের ৩রা র্মাচ ছাত্রদলে যোগদানের মাধ্যমে রাজনীতিতে হাতেখড়ি। এরপর ১৯৮৫-৮৬ সালে ময়মনসিংহ মেডিকেল ছাত্রদলের এবং ১৯৮৬-৮৭ সালে বৃহত্তর ময়মনসিংহ জেলা ছাত্রদলের সেক্রেটারী হিসেবে দায়ীত্ব পালন করেন।</p>
                     </div>
                 </div>
             </div>
@@ -192,6 +214,9 @@
                 <button class="filter-btn" data-filter="health">স্বাস্থ্য</button>
                 <button class="filter-btn" data-filter="transport">যোগাযোগ</button>
                 <button class="filter-btn" data-filter="education">শিক্ষা</button>
+                <button class="filter-btn" data-filter="agriculture">কৃষি</button>
+                <button class="filter-btn" data-filter="employment">কর্মসংস্থান</button>
+                <button class="filter-btn" data-filter="infrastructure">অবকাঠামো</button>
             </div>
 
             <div class="projects-grid">
@@ -220,6 +245,33 @@
                     <div class="project-info">
                         <h3>শিক্ষা প্রতিষ্ঠানের সংস্কার</h3>
                         <p>শিক্ষার মান উন্নয়নে সরকারি প্রাথমিক ও উচ্চ বিদ্যালয়গুলোর নতুন ভবন এবং আধুনিক ক্লাসরুম।</p>
+                    </div>
+                </div>
+                <div class="project-card glass-effect hover-float" data-category="agriculture">
+                    <div class="project-image">
+                        <img src="assets/project_agriculture.png" alt="Agriculture Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>কৃষি ও আধুনিক সেচ</h3>
+                        <p>কৃষকদের জীবনমান উন্নয়নে আধুনিক সেচ প্রকল্প ও উন্নত কৃষি সরঞ্জাম বিতরণ।</p>
+                    </div>
+                </div>
+                <div class="project-card glass-effect hover-float" data-category="employment">
+                    <div class="project-image">
+                        <img src="assets/project_employment.png" alt="Employment Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>তরুণদের কর্মসংস্থান</h3>
+                        <p>বেকারত্ব দূরীকরণে তরুণদের জন্য কারিগরি ও ভোকেশনাল ট্রেনিং সেন্টার স্থাপন।</p>
+                    </div>
+                </div>
+                <div class="project-card glass-effect hover-float" data-category="infrastructure">
+                    <div class="project-image">
+                        <img src="assets/project_infrastructure.png" alt="Infrastructure Project">
+                    </div>
+                    <div class="project-info">
+                        <h3>পল্লী উন্নয়ন</h3>
+                        <p>গ্রামাঞ্চলে শতভাগ বিদ্যুতায়নসহ সোলার প্যানেল স্থাপন ও গ্রামীণ সেতু নির্মাণ।</p>
                     </div>
                 </div>
             </div>
@@ -253,6 +305,35 @@
                     <div class="video-info">
                         <h3>জনসংযোগ ও মতবিনিময়</h3>
                         <p>তৃণমূল নেতাকর্মী ও সাধারণ মানুষের সাথে সরাসরি কথোপকথন।</p>
+                    </div>
+                </div>
+                <div class="video-card glass-effect hover-float">
+                    <div class="video-container">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F2006334740286220%2F&show_text=true&width=auto&t=0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>সাম্প্রতিক ফেসবুক রিলস</h3>
+                        <p>অফিসিয়াল ফেসবুক পেইজ থেকে ড. রফিকুল ইসলাম বাচ্চুর সাম্প্রতিক মুহূর্ত।</p>
+                    </div>
+                </div>
+                <!-- 4th Video: Portrait Reel -->
+                <div class="video-card glass-effect hover-float">
+                    <div class="video-container">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1123229459932926%2F&show_text=false&width=auto&t=0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>ঈদ মোবারক বার্তা</h3>
+                        <p>সবাইকে পবিত্র ঈদের শুভেচ্ছা জানিয়ে ড. রফিকুল ইসলাম বাচ্চুর বিশেষ বার্তা।</p>
+                    </div>
+                </div>
+                <!-- 5th Video -->
+                <div class="video-card glass-effect hover-float">
+                    <div class="video-container">
+                        <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1141825111335046%2F&show_text=false&width=auto&t=0" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>নতুন ভিডিও আপডেট</h3>
+                        <p>ড. রফিকুল ইসলাম বাচ্চুর অফিসিয়াল ফেসবুক পেইজ থেকে সর্বশেষ বক্তব্য ও ভিডিও।</p>
                     </div>
                 </div>
             </div>
@@ -344,11 +425,16 @@
         </section>
     </main>
 
+    <!-- Back to Top Button -->
+    <button id="backToTopBtn" class="back-to-top" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <footer class="glass-effect">
         <div class="footer-content">
             <p>&copy; ২০২৬ ড. এস. এম. রফিকুল ইসলাম বাচ্চু। সর্বস্বত্ব সংরক্ষিত।</p>
             <div class="footer-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/Dr.Bachchu" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-youtube"></i></a>
                 <a href="#"><i class="fab fa-whatsapp"></i></a>
