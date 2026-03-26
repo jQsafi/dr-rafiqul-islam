@@ -108,14 +108,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinksList = document.querySelectorAll('.nav-links a');
 
     const scrollObserverOptions = {
-        threshold: 0.2, // More sensitive threshold
-        rootMargin: '-20% 0px -20% 0px' // Center-focused area
+        threshold: 0,
+        rootMargin: '-30% 0px -70% 0px' // High-sensitivity trigger at 30% from top
     };
 
     let currentActiveId = '';
 
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
+            // Find the first section crossing the 30% line
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
                 
