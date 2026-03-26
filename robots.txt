@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://drsmrafiqulislammp.info/sitemap.xml
