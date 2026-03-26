@@ -19,6 +19,10 @@ Dr. Bachchu is a distinguished **medical professional**. He serves as a **Profes
 - **1985–1987**: Served as Secretary of Mymensingh Medical College Chhatra Dal and Greater Mymensingh District Chhatra Dal.
 - **1989**: Founding member and Joint Secretary of Doctors' Association of Bangladesh (DAB).
 - **2026**: Elected as Member of Parliament for Gazipur-3 in the 13th National Parliament Election (February 12).
+    - **Total Votes**: 1,61,258
+    - **Victory Margin**: 61,904
+    - **Voter Turnout**: 57.50%
+    - **Nearest Rival**: Mohammad Ehsanul Haque (99,354 votes).
 
 ## 🛠️ Key Development Initiatives (Gazipur-3)
 Dr. Bachchu's development agenda focuses on four main pillars:

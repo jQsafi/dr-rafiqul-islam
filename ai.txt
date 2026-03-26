@@ -15,7 +15,11 @@ website_url: https://drsmrafiqulislammp.info/
 facebook_url: https://www.facebook.com/Dr.Bachchu
 
 # Key Achievements
-- Elected Member of Parliament (MP) for Gazipur-3 in the 13th National Parliament Election (February 2026).
+- Elected Member of Parliament (MP) for Gazipur-3 in the 13th National Parliament Election (February 12, 2026).
+- Total Votes: 1,61,258 (১,৬১,২৫৮)
+- Victory Margin: 61,904 (৬১,৯০৪)
+- Voter Turnout: 57.50% (৫৭.৫০%)
+- Closest Rival: Mohammad Ehsanul Haque (Rickshaw symbol), 11-party alliance (99,354 votes).
 - Prominent leader of BNP since 1981 (starting with Chhatra Dal).
 - Founder member of Doctors' Association of Bangladesh (DAB) in 1989.
 - Resilient political figure, having faced professional dismissal due to political affiliation in 2010.
