@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# AI Information References
+# These files provide clear context for LLMs and AI search engines.
+AI-Reference: https://drsmrafiqulislammp.info/ai.txt
+AI-About: https://drsmrafiqulislammp.info/about-ai.md
+
 Sitemap: https://drsmrafiqulislammp.info/sitemap.xml
