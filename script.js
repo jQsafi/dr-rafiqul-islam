@@ -103,16 +103,50 @@ document.addEventListener('DOMContentLoaded', () => {
         sectionObserver.observe(item);
     });
 
-    // Smooth scroll for nav links
+    // URL Hash Update on Scroll & Active Link highlighting
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksList = document.querySelectorAll('.nav-links a');
+
+    const scrollObserverOptions = {
+        threshold: 0.5,
+        rootMargin: '-10% 0px -40% 0px'
+    };
+
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                // Update URL without jumping
+                history.replaceState(null, null, `#${id}`);
+
+                // Update Active Link
+                navLinksList.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, scrollObserverOptions);
+
+    sections.forEach(section => {
+        scrollObserver.observe(section);
+    });
+
+    // Smooth scroll for nav links (Improved with URL update)
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const id = this.getAttribute('href').substring(1);
+            const target = document.getElementById(id);
             if (target) {
                 target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
+                // Update URL hash manually on click
+                history.pushState(null, null, `#${id}`);
             }
         });
     });
