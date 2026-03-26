@@ -1122,7 +1122,8 @@ footer {
 
 @media (max-width: 600px) {
     .segment-label {
-        font-size: 0.75rem;
+        font-size: 0.65rem;
+        letter-spacing: 0;
     }
     .radial-progress {
         width: 120px;
