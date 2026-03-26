@@ -108,24 +108,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinksList = document.querySelectorAll('.nav-links a');
 
     const scrollObserverOptions = {
-        threshold: 0.5,
-        rootMargin: '-10% 0px -40% 0px'
+        threshold: 0.2, // More sensitive threshold
+        rootMargin: '-20% 0px -20% 0px' // Center-focused area
     };
+
+    let currentActiveId = '';
 
     const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const id = entry.target.getAttribute('id');
-                // Update URL without jumping
-                history.replaceState(null, null, `#${id}`);
+                
+                if (currentActiveId !== id) {
+                    currentActiveId = id;
+                    
+                    // Update URL without jumping
+                    history.replaceState(null, null, `#${id}`);
 
-                // Update Active Link
-                navLinksList.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${id}`) {
-                        link.classList.add('active');
-                    }
-                });
+                    // Update Active Link
+                    navLinksList.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href === `#${id}`) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                }
             }
         });
     }, scrollObserverOptions);
