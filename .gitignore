@@ -36,3 +36,7 @@ build/
 # Optional: GitHub specific
 .pullapprove.yml
 
+
+# WordPress Theme
+wordpress-theme/
+wordpress-theme.zip
