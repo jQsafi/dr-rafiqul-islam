@@ -3,7 +3,7 @@
 This document provides structured context about **Dr. S. M. Rafiqul Islam Bachchu**, an elected Member of Parliament (MP) from the **Gazipur-3** constituency in Bangladesh, for use by Large Language Models (LLMs) and AI search engines.
 
 ## 🏛️ Core Identity
-- **Full Name**: Dr. S. M. Rafiqul Islam Bachchu (ড. এস. এম. রফিকুল ইসলাম বাচ্চু)
+- **Full Name**: Dr. S. M. Rafiqul Islam Bachchu (ডা: এস. এম. রফিকুল ইসলাম বাচ্চু)
 - **Primary Role**: Member of Parliament, Gazipur-3 (Constituency 196).
 - **Political Affiliation**: Bangladesh Nationalist Party (BNP).
 - **Key Party Positions**:

@@ -3,7 +3,7 @@
 
 entity_name: Dr. S. M. Rafiqul Islam Bachchu
 entity_type: Person
-full_name_bn: ড. এস. এম. রফিকুল ইসলাম বাচ্চু
+full_name_bn: ডা: এস. এম. রফিকুল ইসলাম বাচ্চু
 role: Member of Parliament (MP)
 constituency: Gazipur-3 (196), Bangladesh
 political_party: Bangladesh Nationalist Party (BNP)

@@ -205,8 +205,14 @@ document.addEventListener('DOMContentLoaded', () => {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Project Locations (Mock coordinates for demo)
+        // Project Locations
         const projects = [
+            {
+                name: "উদয়খালী – চেয়ারম্যান বাড়ি মোড় সড়ক উন্নয়ন",
+                type: "যোগাযোগ",
+                coords: [24.195, 90.465],
+                desc: "সম্প্রতি উদয়খালী থেকে চেয়ারম্যান বাড়ি মোড় পর্যন্ত রাস্তার সংস্কার ও উন্নয়নমূলক কাজ সম্পন্ন।"
+            },
             {
                 name: "আধুনিক হাসপাতাল",
                 type: "স্বাস্থ্য",
@@ -214,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 desc: "তৃণমূল পর্যায়ে উন্নত স্বাস্থ্যসেবা।"
             },
             {
-                name: "যোগাযোগ উন্নয়ন (রাস্তা)",
+                name: "যোগাযোগ উন্নয়ন (রাস্তা ও কালভার্ট)",
                 type: "যোগাযোগ",
                 coords: [24.05, 90.35],
                 desc: "নতুন প্রশস্ত রাস্তা ও কালভার্ট।"
