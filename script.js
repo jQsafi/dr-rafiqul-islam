@@ -78,12 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // Observe timeline items and custom hero animations
-    document.querySelectorAll('.timeline-item, .animate-hero-text, .animate-hero-img').forEach(item => {
-        observer.observe(item);
-    });
-
-    // Handle generic elements like sections
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -96,12 +90,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    document.querySelectorAll('.fade-in-up').forEach(item => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(30px)';
-        item.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-        sectionObserver.observe(item);
-    });
+    window.initObservers = function() {
+        document.querySelectorAll('.timeline-item, .animate-hero-text, .animate-hero-img').forEach(item => {
+            observer.observe(item);
+        });
+
+        document.querySelectorAll('.fade-in-up').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
+            sectionObserver.observe(item);
+        });
+    };
+
+    window.initObservers();
 
     // URL Hash Update on Scroll & Active Link highlighting
     const sections = document.querySelectorAll('section[id]');
@@ -265,33 +267,49 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Form submission animation for Portal
+    // Form submission for Citizen Portal
     const form = document.querySelector('.portal-form');
     if (form) {
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = form.querySelector('button');
             const originalText = btn.textContent;
 
-            // Premium sending animation
+            const nameInput = document.getElementById('name');
+            const phoneInput = document.getElementById('phone');
+            const categoryInput = document.getElementById('category');
+            const messageInput = document.getElementById('message');
+
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> পাঠানো হচ্ছে...';
             btn.style.opacity = '0.7';
             btn.disabled = true;
 
-            setTimeout(() => {
+            try {
+                if (window.siteDataService) {
+                    await window.siteDataService.submitCitizenMessage({
+                        name: nameInput ? nameInput.value.trim() : '',
+                        phone: phoneInput ? phoneInput.value.trim() : '',
+                        category: categoryInput ? categoryInput.value : 'সাধারণ',
+                        message: messageInput ? messageInput.value.trim() : ''
+                    });
+                }
+
                 btn.innerHTML = '<i class="fas fa-check-circle"></i> সফলভাবে জমা দেওয়া হয়েছে!';
                 btn.style.backgroundColor = '#059669'; // Emerald 600
                 btn.style.opacity = '1';
                 form.reset();
 
-                // Show a toast or subtle notification if needed, but button change is good for now
                 setTimeout(() => {
                     btn.textContent = originalText;
                     btn.style.backgroundColor = '';
                     btn.style.opacity = '1';
                     btn.disabled = false;
                 }, 4000);
-            }, 2000);
+            } catch (err) {
+                console.error("Message submit failed:", err);
+                btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> পুনরায় চেষ্টা করুন';
+                btn.disabled = false;
+            }
         });
     }
     // FAQ Toggle Logic

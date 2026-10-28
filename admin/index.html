@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>এডমিন ড্যাশবোর্ড | ড. এস. এম. রফিকুল ইসলাম বাচ্চু</title>
+    <link rel="icon" href="../assets/bnp_logo.svg" type="image/svg+xml">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Admin Stylesheet -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- Auth Login Overlay -->
+    <div id="authOverlay" class="auth-overlay">
+        <div class="auth-card">
+            <img src="../assets/bnp_logo.svg" alt="BNP Logo" class="auth-logo">
+            <h2>এডমিন লগইন</h2>
+            <p>ওয়েবসাইটের কন্টেন্ট, রঙ, ফন্ট ও স্লাইডার পরিবর্তনের জন্য লগইন করুন</p>
+
+            <form id="loginForm">
+                <div class="form-group" style="text-align: left;">
+                    <label for="adminEmail">ইমেইল</label>
+                    <input type="email" id="adminEmail" class="form-control" placeholder="admin@drsmrafiqulislammp.info" value="admin@drsmrafiqulislammp.info" required>
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label for="adminPassword">পাসওয়ার্ড</label>
+                    <input type="password" id="adminPassword" class="form-control" placeholder="••••••••" value="admin123" required>
+                </div>
+                <button type="submit" class="adm-btn adm-btn-primary" style="width: 100%; justify-content: center; margin-top: 1rem;">
+                    <i class="fas fa-sign-in-alt"></i> লগইন করুন
+                </button>
+            </form>
+
+            <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 10px; font-size: 0.85rem;">
+                <button type="button" id="openFirebaseSetupBtn" class="adm-btn adm-btn-outline adm-btn-sm">
+                    <i class="fas fa-cog"></i> Firebase সেটআপ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase Setup Modal -->
+    <div id="firebaseModal" class="auth-overlay" style="display: none;">
+        <div class="auth-card" style="max-width: 550px; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 style="font-size: 1.25rem;"><i class="fas fa-fire" style="color: #f59e0b;"></i> Firebase কনফিগারেশন</h3>
+                <button type="button" id="closeFirebaseModalBtn" class="adm-btn adm-btn-outline adm-btn-sm"><i class="fas fa-times"></i></button>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--adm-text-muted); margin-bottom: 1.5rem;">
+                আপনার ফায়ারবেস কনসোল (Firebase Console -> Project Settings -> General -> Web App) থেকে পাওয়া কীগুলো এখানে পেস্ট করুন।
+            </p>
+            <form id="firebaseConfigForm">
+                <div class="form-group">
+                    <label>Project ID *</label>
+                    <input type="text" id="fbProjectId" class="form-control" value="dr-rafiqul-islam" required>
+                </div>
+                <div class="form-group">
+                    <label>API Key *</label>
+                    <input type="text" id="fbApiKey" class="form-control" value="AIzaSyCp3fITNSYxEw-_SoertNeqAdISaXiohz4" required>
+                </div>
+                <div class="form-group">
+                    <label>Auth Domain</label>
+                    <input type="text" id="fbAuthDomain" class="form-control" value="dr-rafiqul-islam.firebaseapp.com">
+                </div>
+                <div class="form-group">
+                    <label>Storage Bucket</label>
+                    <input type="text" id="fbStorageBucket" class="form-control" value="dr-rafiqul-islam.firebasestorage.app">
+                </div>
+                <div class="form-group">
+                    <label>App ID</label>
+                    <input type="text" id="fbAppId" class="form-control" value="1:792519959845:web:a33c3dc3745e02f76ca6cc">
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 1.5rem;">
+                    <button type="submit" class="adm-btn adm-btn-primary" style="flex: 1; justify-content: center;">
+                        <i class="fas fa-save"></i> Firebase সংরক্ষণ ও কানেক্ট
+                    </button>
+                    <button type="button" id="clearFirebaseBtn" class="adm-btn adm-btn-danger">
+                        মুছুন
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="../assets/bnp_logo.svg" alt="BNP Logo">
+            <div>
+                <h3>এডমিন কন্ট্রোল</h3>
+                <span>ড. রফিকুল ইসলাম এমপি</span>
+            </div>
+        </div>
+        <ul class="sidebar-nav">
+            <li class="nav-item active"><button data-tab="tab-theme"><i class="fas fa-palette"></i> থিম ও গ্লোবাল রঙ</button></li>
+            <li class="nav-item"><button data-tab="tab-section-colors"><i class="fas fa-fill-drip"></i> প্রতি সেকশনের রঙ</button></li>
+            <li class="nav-item"><button data-tab="tab-header"><i class="fas fa-heading"></i> লোগো ও হেডার</button></li>
+            <li class="nav-item"><button data-tab="tab-slider"><i class="fas fa-images"></i> হিরো স্লাইডার</button></li>
+            <li class="nav-item"><button data-tab="tab-election"><i class="fas fa-vote-yea"></i> নির্বাচনী ফলাফল</button></li>
+            <li class="nav-item"><button data-tab="tab-about"><i class="fas fa-user-tie"></i> সংক্ষিপ্ত পরিচিতি</button></li>
+            <li class="nav-item"><button data-tab="tab-career"><i class="fas fa-stream"></i> রাজনৈতিক জীবন</button></li>
+            <li class="nav-item"><button data-tab="tab-projects"><i class="fas fa-tasks"></i> উন্নয়ন কর্মকাণ্ড</button></li>
+            <li class="nav-item"><button data-tab="tab-videos"><i class="fas fa-video"></i> ভিডিও গ্যালারি</button></li>
+            <li class="nav-item"><button data-tab="tab-news"><i class="fas fa-newspaper"></i> নিউজ ও প্রেস</button></li>
+            <li class="nav-item"><button data-tab="tab-faq"><i class="fas fa-question-circle"></i> সাধারণ প্রশ্ন (FAQ)</button></li>
+            <li class="nav-item"><button data-tab="tab-map"><i class="fas fa-map-marked-alt"></i> প্রজেক্ট ম্যাপ</button></li>
+            <li class="nav-item"><button data-tab="tab-contact"><i class="fas fa-address-book"></i> যোগাযোগ ও সোশ্যাল মিডিয়া</button></li>
+            <li class="nav-item"><button data-tab="tab-inbox"><i class="fas fa-inbox"></i> নাগরিক বার্তা (ইনবক্স)</button></li>
+            <li class="nav-item"><button data-tab="tab-settings"><i class="fas fa-database"></i> ব্যাকআপ ও সেটিংস</button></li>
+        </ul>
+        <div class="sidebar-footer">
+            <a href="../" target="_blank" class="adm-btn adm-btn-outline" style="justify-content: center; font-size: 0.85rem;">
+                <i class="fas fa-external-link-alt"></i> লাইভ সাইট দেখুন
+            </a>
+            <button id="logoutBtn" class="adm-btn adm-btn-danger" style="justify-content: center; font-size: 0.85rem;">
+                <i class="fas fa-sign-out-alt"></i> লগআউট
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Topbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle"><i class="fas fa-bars"></i></button>
+                <div class="status-badge" id="connectionStatusBadge">
+                    <span class="dot"></span>
+                    <span id="connectionStatusText">লোকাল মেমরি (ডেমো মোড)</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <button type="button" id="saveAllBtn" class="adm-btn adm-btn-primary">
+                    <i class="fas fa-cloud-upload-alt"></i> পরিবর্তন সংরক্ষণ ও পাবলিশ
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content Panes -->
+        <main class="content-area">
+
+            <!-- 1. Theme & Typography Tab -->
+            <div class="tab-pane active" id="tab-theme">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>ফন্ট ও গ্লোবাল টাইপোগ্রাফি (Font & Typography)</h3>
+                            <p>ওয়েবসাইটের বাংলা ও ইংরেজি ফন্ট নির্বাচন করুন</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fontSelect">ফন্ট পরিবার (Font Family)</label>
+                            <select id="fontSelect" class="form-control">
+                                <option value="Noto Sans Bengali, sans-serif|Noto+Sans+Bengali:wght@300;400;500;600;700">Noto Sans Bengali (স্ট্যান্ডার্ড)</option>
+                                <option value="Hind Siliguri, sans-serif|Hind+Siliguri:wght@300;400;500;600;700">Hind Siliguri (জনপ্রিয় বোল্ড)</option>
+                                <option value="Tiro Bangla, serif|Tiro+Bangla:ital@0;1">Tiro Bangla (ক্লাসিক শেরীফ)</option>
+                                <option value="Anek Bangla, sans-serif|Anek+Bangla:wght@300;400;600;700">Anek Bangla (আধুনিক ক্লিন)</option>
+                                <option value="Inter, sans-serif|Inter:wght@300;400;600;700">Inter (আধুনিক জ্যামিতিক)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>গ্লোবাল রঙের প্যালেট (Global Color Palette)</h3>
+                            <p>পুরো ওয়েবসাইটের মূল থিম রঙ ও ব্যাকগ্রাউন্ড নির্ধারণ করুন</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>ওয়েবসাইট ব্যাকগ্রাউন্ড রঙ (Body Background)</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="themeBgColor" class="color-input" value="#0f172a">
+                                <input type="text" id="themeBgColorText" class="form-control" value="#0f172a">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>প্রাইমারি একসেন্ট রঙ (Emerald Primary)</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="themePrimaryColor" class="color-input" value="#10b981">
+                                <input type="text" id="themePrimaryColorText" class="form-control" value="#10b981">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>প্রাইমারি হোভার রঙ (Primary Hover)</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="themePrimaryHover" class="color-input" value="#059669">
+                                <input type="text" id="themePrimaryHoverText" class="form-control" value="#059669">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>মূল লেখার রঙ (Main Text Color)</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="themeTextMain" class="color-input" value="#f8fafc">
+                                <input type="text" id="themeTextMainText" class="form-control" value="#f8fafc">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>সেকেন্ডারি লেখার রঙ (Muted Text Color)</label>
+                            <div class="color-picker-row">
+                                <input type="color" id="themeTextMuted" class="color-input" value="#cbd5e1">
+                                <input type="text" id="themeTextMutedText" class="form-control" value="#cbd5e1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Per-Section Color Customizer Tab -->
+            <div class="tab-pane" id="tab-section-colors">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>প্রতিটি সেকশনের রঙ কাস্টমাইজেশন (Per-Section Colors)</h3>
+                            <p>ওয়েবসাইটের প্রতিটি সেকশনের ব্যাকগ্রাউন্ড, টেক্সট ও অ্যাকসেন্ট রঙ আলাদাভাবে পরিবর্তন করুন</p>
+                        </div>
+                    </div>
+                    <div id="sectionColorsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Logo & Header Tab -->
+            <div class="tab-pane" id="tab-header">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>লোগো ও সাইট শিরোনাম (Branding & Logo)</h3>
+                            <p>হেডারের লোগো ইমেজ অথবা টেক্সট পরিবর্তন করুন</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>সাইট টাইটেল (Site Title)</label>
+                            <input type="text" id="headerSiteTitle" class="form-control" placeholder="ড. এস. এম. রফিকুল ইসলাম বাচ্চু">
+                        </div>
+                        <div class="form-group">
+                            <label>লোগো ইমেজ লিঙ্ক (Image URL বা ফাইল আপলোড)</label>
+                            <input type="text" id="headerLogoImage" class="form-control" placeholder="assets/bnp_logo.svg">
+                            <div class="image-preview-container">
+                                <input type="file" id="logoUploadFile" accept="image/*" style="font-size: 0.85rem;">
+                                <img id="logoPreviewImg" src="../assets/bnp_logo.svg" alt="Logo Preview" class="image-preview">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>মেনু ও ন্যাভিগেশন লিংক (Navigation Menu)</h3>
+                            <p>মেনুর বাটনগুলোর নাম ও টার্গেট সেকশন নিয়ন্ত্রণ করুন</p>
+                        </div>
+                    </div>
+                    <div id="navLinksContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Hero Slider Tab -->
+            <div class="tab-pane" id="tab-slider">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>হিরো স্লাইডার সেটিংস (Hero Slider Settings)</h3>
+                            <p>স্লাইডারের অটো-প্লে ও ট্রানজিশন সময় নির্ধারণ করুন</p>
+                        </div>
+                        <button type="button" id="addNewSlideBtn" class="adm-btn adm-btn-primary adm-btn-sm">
+                            <i class="fas fa-plus"></i> নতুন স্লাইড যোগ করুন
+                        </button>
+                    </div>
+                    <div class="form-grid" style="margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>অটো-প্লে সক্রিয় রাখুন (Autoplay)</label>
+                            <select id="sliderAutoplay" class="form-control">
+                                <option value="true">হ্যাঁ (স্বয়ংক্রিয়ভাবে স্লাইড পরিবর্তন হবে)</option>
+                                <option value="false">না (ম্যানুয়ালি ক্লিক করে বদলাবে)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>স্লাইড পরিবর্তনের বিরতি (মিলি-সেকেন্ড, যেমন 6000 = ৬ সেকেন্ড)</label>
+                            <input type="number" id="sliderDelay" class="form-control" value="6000" step="500">
+                        </div>
+                    </div>
+
+                    <div id="sliderItemsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Election Results Tab -->
+            <div class="tab-pane" id="tab-election">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>নির্বাচনী ফলাফল হেডার ও তুলনা</h3>
+                            <p>ভোটের তুলনা বার ও শীর্ষ তথ্যসমূহ</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>সেকশন শিরোনাম</label>
+                            <input type="text" id="electionTitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>সেকশন সাব-টাইটেল</label>
+                            <input type="text" id="electionSubtitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>বিজয়ী প্রার্থীর নাম ও শতকরা হার (%)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="electionWinnerName" class="form-control" placeholder="ড. বাচ্চু" style="flex: 2;">
+                                <input type="number" id="electionWinnerPercent" class="form-control" placeholder="61.9" step="0.1" style="flex: 1;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>প্রতিদ্বন্দ্বী প্রার্থীর নাম ও শতকরা হার (%)</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="text" id="electionRivalName" class="form-control" placeholder="নিকটতম প্রতিদ্বন্দ্বী" style="flex: 2;">
+                                <input type="number" id="electionRivalPercent" class="form-control" placeholder="38.1" step="0.1" style="flex: 1;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>স্ট্যাট কার্ডসমূহ (Statistics Cards)</h3>
+                            <p>প্রাপ্ত মোট ভোট, ব্যবধান ও টার্নআউট</p>
+                        </div>
+                    </div>
+                    <div id="electionStatsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. About Bio Tab -->
+            <div class="tab-pane" id="tab-about">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>পরিচিতি বিবরণী (Biography)</h3>
+                            <p>ড. রফিকুল ইসলাম বাচ্চুর জীবন ও ভূমিকা সম্পর্কে লিখুন</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>শিরোনাম</label>
+                        <input type="text" id="aboutTitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>প্যারাগ্রাফ ১</label>
+                        <textarea id="aboutParagraph1" class="form-control" rows="4"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>প্যারাগ্রাফ ২</label>
+                        <textarea id="aboutParagraph2" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>পরিচিতি কার্ডসমূহ (About Cards)</h3>
+                            <p>শিক্ষা, সমাজসেবা ও রাজনৈতিক অবস্থান</p>
+                        </div>
+                    </div>
+                    <div id="aboutCardsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Career Timeline Tab -->
+            <div class="tab-pane" id="tab-career">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>রাজনৈতিক জীবনের মাইলফলক (Timeline)</h3>
+                            <p>ছাত্র রাজনীতি থেকে জাতীয় সংসদ পর্যন্ত বিভিন্ন পর্ব</p>
+                        </div>
+                        <button type="button" id="addNewTimelineBtn" class="adm-btn adm-btn-primary adm-btn-sm">
+                            <i class="fas fa-plus"></i> নতুন মাইলফলক যোগ করুন
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label>সেকশন শিরোনাম</label>
+                        <input type="text" id="careerTitle" class="form-control">
+                    </div>
+                    <div id="timelineItemsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Projects Gallery Tab -->
+            <div class="tab-pane" id="tab-projects">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>উন্নয়নমূলক প্রকল্পসমূহ (Projects)</h3>
+                            <p>হাসপাতাল, রাস্তা, শিক্ষা, কৃষিসহ বিভিন্ন প্রকল্প</p>
+                        </div>
+                        <button type="button" id="addNewProjectBtn" class="adm-btn adm-btn-primary adm-btn-sm">
+                            <i class="fas fa-plus"></i> নতুন প্রকল্প যোগ করুন
+                        </button>
+                    </div>
+                    <div class="form-grid" style="margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>সেকশন শিরোনাম</label>
+                            <input type="text" id="projectsTitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>সেকশন সাব-টাইটেল</label>
+                            <input type="text" id="projectsSubtitle" class="form-control">
+                        </div>
+                    </div>
+                    <div id="projectsItemsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Videos Tab -->
+            <div class="tab-pane" id="tab-videos">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>ভিডিও গ্যালারি (YouTube & Facebook Embeds)</h3>
+                            <p>জনসভা, সাক্ষাৎকার ও সাম্প্রতিক ভিডিওসমূহ</p>
+                        </div>
+                        <button type="button" id="addNewVideoBtn" class="adm-btn adm-btn-primary adm-btn-sm">
+                            <i class="fas fa-plus"></i> নতুন ভিডিও যোগ করুন
+                        </button>
+                    </div>
+                    <div class="form-grid" style="margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>সেকশন শিরোনাম</label>
+                            <input type="text" id="videosTitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>সেকশন সাব-টাইটেল</label>
+                            <input type="text" id="videosSubtitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>আরও ভিডিও বাটন লিঙ্ক (URL)</label>
+                            <input type="text" id="videosMoreBtnUrl" class="form-control">
+                        </div>
+                    </div>
+                    <div id="videosItemsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. News Tab -->
+            <div class="tab-pane" id="tab-news">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>নিউজ ও প্রেস রিলিজ (News & Articles)</h3>
+                            <p>সাম্প্রতিক রাজনৈতিক খবর ও আপডেট</p>
+                        </div>
+                        <button type="button" id="addNewNewsBtn" class="adm-btn adm-btn-primary adm-btn-sm">
+                            <i class="fas fa-plus"></i> নতুন নিউজ যোগ করুন
+                        </button>
+                    </div>
+                    <div class="form-grid" style="margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>সেকশন শিরোনাম</label>
+                            <input type="text" id="newsTitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>সেকশন সাব-টাইটেল</label>
+                            <input type="text" id="newsSubtitle" class="form-control">
+                        </div>
+                    </div>
+                    <div id="newsItemsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. FAQ Tab -->
+            <div class="tab-pane" id="tab-faq">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>সচরাচর জিজ্ঞাস্য (FAQ Accordion)</h3>
+                            <p>জনসাধারণের বিভিন্ন প্রশ্নের উত্তর</p>
+                        </div>
+                        <button type="button" id="addNewFaqBtn" class="adm-btn adm-btn-primary adm-btn-sm">
+                            <i class="fas fa-plus"></i> নতুন প্রশ্ন যোগ করুন
+                        </button>
+                    </div>
+                    <div class="form-grid" style="margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>সেকশন শিরোনাম</label>
+                            <input type="text" id="faqTitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>সেকশন সাব-টাইটেল</label>
+                            <input type="text" id="faqSubtitle" class="form-control">
+                        </div>
+                    </div>
+                    <div id="faqItemsContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 12. Project Map Tab -->
+            <div class="tab-pane" id="tab-map">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>প্রজেক্ট ম্যাপ মার্কারসমূহ (Map Markers)</h3>
+                            <p>গাজীপুর-৩ এর বিভিন্ন ইউনিয়নের প্রজেক্ট লোকেশন</p>
+                        </div>
+                        <button type="button" id="addNewMapMarkerBtn" class="adm-btn adm-btn-primary adm-btn-sm">
+                            <i class="fas fa-plus"></i> নতুন মার্কার যোগ করুন
+                        </button>
+                    </div>
+                    <div class="form-grid" style="margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label>সেকশন শিরোনাম</label>
+                            <input type="text" id="mapTitle" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>সেকশন সাব-টাইটেল</label>
+                            <input type="text" id="mapSubtitle" class="form-control">
+                        </div>
+                    </div>
+                    <div id="mapMarkersContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 13. Contact & Social Media Tab -->
+            <div class="tab-pane" id="tab-contact">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>অফিসিয়াল যোগাযোগের তথ্য (Official Contact Info)</h3>
+                            <p>ওয়েবসাইটে প্রদর্শিত অফিস ঠিকানা, হটলাইন ফোন, ইমেইল ও সময়সূচী</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>অফিস ঠিকানা (Office Address)</label>
+                            <input type="text" id="contactAddress" class="form-control" placeholder="এমপি কার্যালয়, শ্রীপুর চৌরাস্তা, শ্রীপুর, গাজীপুর-১৭৪০">
+                        </div>
+                        <div class="form-group">
+                            <label>হটলাইন / ফোন নম্বর (Phone / Hotline)</label>
+                            <input type="text" id="contactPhone" class="form-control" placeholder="+880 1711-000000">
+                        </div>
+                        <div class="form-group">
+                            <label>অফিসিয়াল ইমেইল (Email Address)</label>
+                            <input type="email" id="contactEmail" class="form-control" placeholder="contact@drsmrafiqulislammp.info">
+                        </div>
+                        <div class="form-group">
+                            <label>হোয়াটসঅ্যাপ হেল্পলাইন নম্বর</label>
+                            <input type="text" id="contactWhatsapp" class="form-control" placeholder="+880 1711-000000">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>অফিস খোলার সময়সূচী (Working Hours)</label>
+                            <input type="text" id="contactHours" class="form-control" placeholder="শনিবার - বৃহস্পতিবার: সকাল ১০:০০ - বিকাল ৫:০০">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>সিটিজেন পোর্টাল সেটিংস (Citizen Portal Form)</h3>
+                            <p>জনগণের সরাসরি যোগাযোগের ফর্মের শিরোনাম ও সাব-টাইটেল</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>পোর্টাল ব্যাজ</label>
+                            <input type="text" id="contactBadge" class="form-control" placeholder="সিটিজেন পোর্টাল">
+                        </div>
+                        <div class="form-group">
+                            <label>শিরোনাম</label>
+                            <input type="text" id="contactTitle" class="form-control">
+                        </div>
+                        <div class="form-group" style="grid-column: 1 / -1;">
+                            <label>সাব-টাইটেল</label>
+                            <input type="text" id="contactSubtitle" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>সোশ্যাল মিডিয়া প্রোফাইল লিংক (Social Media Profiles)</h3>
+                            <p>হিরো ও ফুটারে প্রদর্শিত সোশ্যাল মিডিয়া লিংকগুলো এখান থেকে সহজে পরিবর্তন করুন</p>
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label><i class="fab fa-facebook" style="color: #1877f2; margin-right: 5px;"></i> Facebook পেইজ URL</label>
+                            <input type="url" id="socialFacebook" class="form-control" placeholder="https://www.facebook.com/Dr.Bachchu">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fab fa-youtube" style="color: #ff0000; margin-right: 5px;"></i> YouTube চ্যানেল URL</label>
+                            <input type="url" id="socialYoutube" class="form-control" placeholder="https://youtube.com/@...">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fab fa-twitter" style="color: #1da1f2; margin-right: 5px;"></i> Twitter / X প্রোফাইল URL</label>
+                            <input type="url" id="socialTwitter" class="form-control" placeholder="https://twitter.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fab fa-whatsapp" style="color: #25d366; margin-right: 5px;"></i> WhatsApp চ্যাট লিংক / নম্বর</label>
+                            <input type="text" id="socialWhatsapp" class="form-control" placeholder="https://wa.me/8801700000000">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fab fa-instagram" style="color: #e4405f; margin-right: 5px;"></i> Instagram প্রোফাইল URL</label>
+                            <input type="url" id="socialInstagram" class="form-control" placeholder="https://instagram.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fab fa-telegram-plane" style="color: #0088cc; margin-right: 5px;"></i> Telegram চ্যানেল / লিঙ্ক</label>
+                            <input type="url" id="socialTelegram" class="form-control" placeholder="https://t.me/...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>ফুটার ও কপিরাইট (Footer)</h3>
+                            <p>ফুটার টেক্সট ও কপিরাইট নোটিশ</p>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label>কপিরাইট নোটিশ</label>
+                        <input type="text" id="footerCopyright" class="form-control">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 14. Citizen Messages Inbox Tab -->
+            <div class="tab-pane" id="tab-inbox">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>নাগরিক বার্তা ও অভিযোগ (Citizen Inbox)</h3>
+                            <p>পোর্টাল থেকে প্রাপ্ত সরাসরি পরামর্শ, অভিযোগ ও সহায়তা বার্তা</p>
+                        </div>
+                        <button type="button" id="refreshInboxBtn" class="adm-btn adm-btn-outline adm-btn-sm">
+                            <i class="fas fa-sync-alt"></i> রিফ্রেশ করুন
+                        </button>
+                    </div>
+                    <div id="inboxMessagesContainer">
+                        <!-- Populated dynamically via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 15. Settings & Backup Tab -->
+            <div class="tab-pane" id="tab-settings">
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>ডেটা ব্যাকআপ ও রিস্টোর (Backup & Restore)</h3>
+                            <p>সম্পূর্ণ ওয়েবসাইটের ডেটা JSON ফাইল হিসেবে ডাউনলোড করুন বা আপলোড করে রিস্টোর করুন</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                        <button type="button" id="exportBackupBtn" class="adm-btn adm-btn-primary">
+                            <i class="fas fa-file-download"></i> ব্যাকআপ ডাউনলোড করুন (JSON)
+                        </button>
+                        <label class="adm-btn adm-btn-outline" style="cursor: pointer; margin-bottom: 0;">
+                            <i class="fas fa-file-upload"></i> ব্যাকআপ রিস্টোর করুন
+                            <input type="file" id="importBackupFile" accept=".json" style="display: none;">
+                        </label>
+                        <button type="button" id="resetDefaultBtn" class="adm-btn adm-btn-danger">
+                            <i class="fas fa-undo"></i> ডিফল্ট তথ্যে রিসেট করুন
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="panel-card-header">
+                        <div>
+                            <h3>Firebase ডেটাবেস সংযোগ স্থিতি</h3>
+                            <p>ফায়ারবেস ক্লাউড স্টোরেজ ও অথেনটিকেশন কনফিগারেশন</p>
+                        </div>
+                    </div>
+                    <div id="firebaseStatusDetails" style="font-size: 0.95rem; line-height: 1.8;">
+                        <!-- Updated via JS -->
+                    </div>
+                    <button type="button" id="reopenFirebaseModalBtn" class="adm-btn adm-btn-outline" style="margin-top: 1rem;">
+                        <i class="fas fa-key"></i> Firebase কী পরিবর্তন করুন
+                    </button>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="admToast" class="adm-toast">
+        <i class="fas fa-check-circle" style="color: var(--adm-primary); font-size: 1.2rem;"></i>
+        <span id="toastMsg">সফলভাবে সংরক্ষিত হয়েছে!</span>
+    </div>
+
+    <!-- Firebase SDK Compat Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+
+    <!-- Services & Admin Logic -->
+    <script src="../firebase-config.js"></script>
+    <script src="admin.js"></script>
+</body>
+
+</html>
