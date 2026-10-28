@@ -413,7 +413,7 @@
     "telegram": ""
   },
   "footer": {
-    "copyright": "© ২০২৬ ড. এস. এম. রফিকুল ইসলাম বাচ্চু। সর্বস্বত্ব সংরক্ষিত।",
+    "copyright": "© ২০২৬ ড. এস. এম. রফিকুল ইসলাম বাচ্চু। সর্বস্বত্ব সংরক্ষিত। | Developed by <a href=\"https://github.com/jQsafi\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: var(--primary); font-weight: 600;\">Shafayat Hossain</a>",
     "socialLinks": [
       { "platform": "facebook", "icon": "fab fa-facebook-f", "url": "https://www.facebook.com/Dr.Bachchu", "label": "Facebook" },
       { "platform": "twitter", "icon": "fab fa-twitter", "url": "#", "label": "Twitter" },

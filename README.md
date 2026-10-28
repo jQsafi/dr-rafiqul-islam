@@ -40,4 +40,7 @@
 এখন থেকে আপনার কম্পিউটারে আর `npm run deploy` করার প্রয়োজন নেই। আপনি যখনই `main` ব্রাঞ্চে কোনো কোড পুশ করবেন, **GitHub Actions** নিজে থেকেই সাইটটি আপডেট করে দেবে।
 
 ---
-**প্রস্তুতকারক:** Antigravity (Advanced Agentic Coding AI)
+
+## 👨‍💻 ডেভেলপার ক্রেডিট (Developer Credit)
+- **উন্নয়ন ও রক্ষণাবেক্ষণ:** [Shafayat Hossain (@jQsafi)](https://github.com/jQsafi)
+- **সহায়ক এআই প্ল্যাটফর্ম:** Antigravity (Advanced Agentic Coding AI)

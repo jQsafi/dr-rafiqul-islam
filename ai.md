@@ -91,5 +91,11 @@ The website includes an administrative dashboard enabling non-technical admins t
 
 ---
 
-## 5. Proprietary Notice
+## 5. Developer & Maintainer Credit
+* **Developer:** Shafayat Hossain ([@jQsafi](https://github.com/jQsafi))
+* **AI Architecture & Pairing:** Google DeepMind Advanced Agentic Coding (Antigravity)
+
+---
+
+## 6. Proprietary Notice
 All content, code, branding, and imagery in this repository are strictly confidential and protected under international copyright law. Unauthorized copying, distribution, or reproduction is strictly prohibited.
